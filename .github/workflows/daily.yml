@@ -1,0 +1,45 @@
+name: Flux daily papers
+
+on:
+  schedule:
+    # 01:15 UTC = 06:45 IST, every day.
+    # arXiv announces new papers at 20:00 US Eastern time, Sunday to Thursday,
+    # which is 05:30 or 06:30 IST the next morning depending on US daylight saving.
+    - cron: "15 1 * * *"
+  workflow_dispatch: {}   # adds a "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: flux-daily
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch papers, write data, send notification
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/flux_daily.py
+
+      - name: Save the new data to the repository
+        run: |
+          git config user.name  "flux-bot"
+          git config user.email "flux-bot@users.noreply.github.com"
+          git add docs/data
+          if git diff --cached --quiet; then
+            echo "No changes today."
+          else
+            git commit -m "Daily papers $(date -u +%Y-%m-%d)"
+            git push
+          fi
