@@ -1,0 +1,23 @@
+{
+  "user_name": "Pranshu",
+  "app_url": "https://YOUR-GITHUB-USERNAME.github.io/flux/",
+
+  "categories": ["astro-ph.IM", "astro-ph.SR", "astro-ph.EP"],
+  "include_cross_lists": true,
+
+  "keywords": ["spectroscop", "spectrograph", "variable star", "solar radio", "Be star", "light curve"],
+  "authors": ["Massey"],
+
+  "summaries": {
+    "enabled": true,
+    "max_papers": 15,
+    "model": "claude-haiku-4-5"
+  },
+
+  "notify": {
+    "enabled": true,
+    "server": "https://ntfy.sh"
+  },
+
+  "archive_days": 30
+}

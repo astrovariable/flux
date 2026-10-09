@@ -1,0 +1,18 @@
+{
+  "_help": "Landmark papers for 'Pick of the day'. 'id' is the arXiv ID. Title, authors and abstract are fetched from arXiv automatically, so only the ID needs to be right. 'on' (MM-DD, optional) shows the paper on that date every year, e.g. the day it was announced. 'note' is a one-line 'why it matters' shown in the app. Add your own freely.",
+  "picks": [
+    { "id": "1602.03837", "on": "02-11", "note": "The first direct detection of gravitational waves, from two merging black holes (GW150914)." },
+    { "id": "1710.05832", "on": "10-16", "note": "The first gravitational waves from two merging neutron stars (GW170817)." },
+    { "id": "1710.05833", "on": "10-16", "note": "The same neutron-star merger seen in light across the spectrum: the start of multi-messenger astronomy." },
+    { "id": "1906.11238", "on": "04-10", "note": "The first image of a black hole's shadow, in the galaxy M87." },
+    { "id": "1703.01424", "on": "02-22", "note": "Seven Earth-sized planets found around the small, cool star TRAPPIST-1." },
+    { "id": "astro-ph/9805201", "note": "Distant supernovae show the expansion of the Universe is speeding up." },
+    { "id": "astro-ph/9812133", "note": "An independent supernova team finds the same accelerating expansion." },
+    { "id": "astro-ph/0501171", "note": "The first clear detection of baryon acoustic oscillations in galaxy clustering." },
+    { "id": "astro-ph/0302209", "note": "WMAP's first-year maps of the cosmic microwave background pin down the main cosmological numbers." },
+    { "id": "1807.06209", "note": "Planck's final measurement of the cosmological parameters." },
+    { "id": "2208.00211", "note": "Gaia Data Release 3: positions, motions and much more for nearly two billion stars." },
+    { "id": "2304.04869", "note": "How the James Webb Space Telescope was designed and built, by the people who made it." },
+    { "id": "1010.5270", "note": "A practical guide to how astronomers take and process spectra." }
+  ]
+}
