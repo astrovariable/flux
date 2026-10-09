@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:arxiv="http://arxiv.org/schemas/atom">
+<title>arXiv Query</title>
+<entry><id>http://arxiv.org/abs/0000.09999v1</id><published>2016-02-11T21:00:00Z</published>
+<title>Sample landmark paper title used only for testing</title>
+<summary>Sample abstract used only for offline testing of the pick of the day.</summary>
+<author><name>Sample Collaboration</name></author>
+<arxiv:primary_category term="gr-qc"/></entry></feed>

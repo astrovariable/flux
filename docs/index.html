@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flux</title>
+<meta name="description" content="New astronomy and astrophysics preprints, sorted for you every morning.">
+<meta name="theme-color" content="#232B3A">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Flux">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
+<style>
+:root{
+  --ink:#1E2430; --navy:#232B3A; --navy-2:#2F394A; --navy-3:#3A4558;
+  --muted:#5B6170; --muted-2:#3E4656; --line:#ECE9E2; --line-2:#DAD6CD;
+  --paper:#FFFFFF; --cream:#F3F1EC; --sand:#EFEBE3;
+  --lav:#D4C2F5; --lav-soft:#E9E1F8; --lav-deep:#5B4396;
+  --blue:#DCE6F5; --rose:#F3DEDD; --mint:#D5ECE4;
+  --on-dark:#D9DEE7; --on-dark-2:#B9C0CC;
+  --serif:'DM Serif Display', Georgia, serif;
+  --sans:'Plus Jakarta Sans','Noto Sans Devanagari',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+body{min-height:100vh}
+a{color:inherit}
+button{font-family:inherit;color:inherit}
+.app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--paper);position:relative;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+.app.dark{background:var(--navy);color:#fff}
+.wrap{padding:calc(20px + env(safe-area-inset-top)) 20px 20px}
+h1{margin:0;font-size:24px;font-weight:700;line-height:1.25}
+h2{margin:24px 0 12px;font-size:15px;font-weight:700}
+.sub{margin:6px 0 0;font-size:13px;color:var(--muted)}
+.serif{font-family:var(--serif);font-weight:400}
+.row{display:flex;align-items:center;gap:12px}
+.between{justify-content:space-between}
+.iconbtn{width:44px;height:44px;border-radius:50%;border:0;background:var(--cream);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;text-decoration:none}
+.iconbtn.ghost{background:transparent;margin-left:-10px}
+.iconbtn.outline{width:52px;height:52px;background:var(--paper);border:1px solid var(--line-2)}
+.dark .iconbtn.outline{background:transparent;border-color:#4A5468}
+.pill{height:54px;border-radius:999px;border:0;background:var(--lav);color:var(--ink);font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;cursor:pointer;padding:0 20px}
+.pill.ghost{background:transparent;border:1px solid #4A5468;color:#fff;height:48px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:var(--paper);font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.tag{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;background:var(--lav-soft);font-size:11px;font-weight:700;color:var(--ink)}
+.seg{display:inline-flex;gap:4px;background:var(--cream);border-radius:999px;padding:4px}
+.seg button{height:34px;padding:0 13px;border:0;border-radius:999px;background:transparent;color:var(--muted);font-weight:600;font-size:13px;cursor:pointer}
+.seg button.on{background:var(--paper);color:var(--ink);box-shadow:0 1px 3px rgba(30,36,48,.15)}
+.card-pick{display:flex;position:relative;margin-top:20px;min-height:168px;border-radius:22px;background:var(--sand);text-decoration:none;overflow:hidden}
+.card-pick .txt{padding:18px 0 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1;min-width:0}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--lav-deep)}
+.card-pick .t{font-family:var(--serif);font-size:19px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.card-pick .go{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;background:var(--lav);display:flex;align-items:center;justify-content:center}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{height:74px;border-radius:18px;border:2px solid transparent;padding:12px 14px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;cursor:pointer;font-weight:700;font-size:13px}
+.tile span{font-weight:500;font-size:12px;color:var(--muted-2)}
+.tile.on{border-color:var(--navy)}
+.list{display:flex;flex-direction:column;gap:8px}
+.item{display:flex;gap:12px;align-items:flex-start;text-decoration:none;padding:12px;border-radius:16px;border:1px solid var(--line);min-height:64px}
+.badge{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700}
+.item .t{font-size:14px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item .m{font-size:12px;color:var(--muted);margin-top:3px}
+.item .chips{margin-top:6px;gap:5px}
+.empty{padding:28px 18px;border-radius:18px;background:var(--cream);font-size:14px;line-height:1.55;color:var(--muted-2)}
+.hero{height:170px;background:var(--sand);position:relative}
+.hero .iconbtn{position:absolute;left:16px;top:calc(14px + env(safe-area-inset-top));background:#fff}
+.body{font-size:15px;line-height:1.65;margin:16px 0 0}
+.note{font-size:12px;color:var(--muted);margin-top:6px}
+.actions{display:flex;gap:10px;margin-top:24px}
+.actions .pill{flex:1}
+.stat{height:86px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.stat b{font-size:22px}
+.stat span{font-size:12px;color:var(--muted-2)}
+.panel{background:var(--navy);color:#fff;border-radius:28px 28px 0 0;padding:22px 20px 28px;margin-top:22px;min-height:360px}
+.bar{height:30px;border-radius:999px;background:var(--navy-3);position:relative;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px}
+.bar span{position:absolute;left:12px;top:7px;font-size:12px;font-weight:700;color:var(--ink)}
+.dark .item{border:0;background:var(--navy-2)}
+.dark .item .m{color:var(--on-dark-2)}
+.search{height:52px;border-radius:999px;background:var(--cream);display:flex;align-items:center;gap:10px;padding:0 18px;margin-top:8px}
+.search input{border:0;background:transparent;outline:none;font:500 15px var(--sans);color:var(--ink);flex:1;min-width:0}
+label.lbl{display:block;margin-top:16px;font-size:13px;font-weight:600;color:var(--muted-2)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}
+.fact{border-radius:16px;background:var(--navy-2);padding:12px;font-size:12px;color:var(--on-dark-2)}
+.fact b{display:block;font-size:16px;color:#fff;margin-bottom:2px}
+nav.tabs{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:480px;height:calc(76px + env(safe-area-inset-bottom));padding:0 8px env(safe-area-inset-bottom);background:var(--paper);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));z-index:5}
+nav.tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;color:var(--muted);font-size:11px;font-weight:600}
+nav.tabs a span{width:52px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+nav.tabs a.on{color:var(--ink);font-weight:700}
+nav.tabs a.on span{background:var(--lav)}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.show{opacity:1}
+.hi{font-family:'Noto Sans Devanagari',var(--sans)}
+details summary{cursor:pointer;font-weight:600;font-size:14px;margin-top:18px}
+:focus-visible{outline:3px solid var(--lav-deep);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="app" id="app"><div class="wrap"><p class="sub">Loading…</p></div></div>
+<nav class="tabs" id="tabs" aria-label="Main">
+  <a href="#/" data-tab="today"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16h5l2-8 3 12 2-6h6"/></svg></span>Today</a>
+  <a href="#/search" data-tab="search"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span>Search</a>
+  <a href="#/alerts" data-tab="alerts"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg></span>Alerts</a>
+  <a href="#/library" data-tab="library"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span>Library</a>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+'use strict';
+
+// ------------------------------------------------------------ small helpers
+const $app = document.getElementById('app');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('flux.' + k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem('flux.' + k, JSON.stringify(v)); } catch {} }
+};
+const ICON = {
+  back: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>',
+  arrow: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  search: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
+  save: f => `<svg width="20" height="20" viewBox="0 0 24 24" fill="${f ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>`,
+  share: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>'
+};
+const TINT = { 'astro-ph.IM':'var(--blue)', 'astro-ph.SR':'var(--rose)', 'astro-ph.EP':'var(--mint)', 'astro-ph.GA':'var(--lav-soft)', 'astro-ph.CO':'var(--sand)', 'astro-ph.HE':'var(--rose)', 'gr-qc':'var(--lav-soft)' };
+const NAMES = { 'astro-ph.GA':'Galaxies','astro-ph.CO':'Cosmology','astro-ph.EP':'Exoplanets','astro-ph.HE':'High energy','astro-ph.IM':'Instruments','astro-ph.SR':'Solar & stellar','gr-qc':'Gravity','physics.space-ph':'Space physics','physics.ed-ph':'Physics education' };
+const tint = c => TINT[c] || 'var(--sand)';
+const code = c => { const s = String(c || ''); if (s === 'gr-qc') return 'GR'; const p = s.split('.'); return (p[1] || p[0] || '?').replace('-ph','').slice(0, 2).toUpperCase(); };
+const fmtDate = (iso, opts) => { if (!iso) return ''; const d = new Date(iso + 'T00:00:00'); return isNaN(d) ? iso : d.toLocaleDateString('en-GB', opts || { weekday:'short', day:'numeric', month:'short' }); };
+const surname = n => /collaboration|team|consortium|survey/i.test(n) ? n : n.split(' ').slice(-1)[0];
+const shortAuthors = a => !a || !a.length ? '' : a.length > 2 ? `${surname(a[0])} et al.` : a.map(surname).join(', ');
+const todayISO = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 1800); }
+
+// ------------------------------------------------------------ data
+const state = { today: null, pick: null, index: null, archive: {}, filter: 'all', tab: 'summary', search: { q: '', cat: 'all', range: '7' } };
+async function getJSON(path) {
+  try { const r = await fetch(path, { cache: 'no-cache' }); return r.ok ? await r.json() : null; } catch { return null; }
+}
+async function loadCore() {
+  [state.today, state.pick, state.index] = await Promise.all([getJSON('data/today.json'), getJSON('data/pick.json'), getJSON('data/index.json')]);
+}
+async function loadArchive(days) {
+  const dates = (state.index && state.index.dates || []).slice(0, days);
+  await Promise.all(dates.filter(d => !state.archive[d]).map(async d => { state.archive[d] = await getJSON(`data/archive/${d}.json`) || { papers: [] }; }));
+  return dates.flatMap(d => (state.archive[d].papers || []).map(p => ({ ...p, _date: d })));
+}
+function findPaper(id) {
+  const pools = [state.today && state.today.papers, ...Object.values(state.archive).map(a => a.papers), Object.values(store.get('saved', {}))];
+  for (const pool of pools) { const p = (pool || []).find(x => x.id === id); if (p) return p; }
+  if (state.pick && state.pick.id === id) return state.pick;
+  return null;
+}
+function markRead(p) {
+  const read = store.get('read', {});
+  if (!read[p.id]) { read[p.id] = { day: todayISO(), cat: p.primary || (p.categories || [])[0] || '', title: p.title }; store.set('read', read); }
+}
+function toggleSave(p) {
+  const saved = store.get('saved', {});
+  if (saved[p.id]) { delete saved[p.id]; toast('Removed from library'); }
+  else { saved[p.id] = { id: p.id, title: p.title, authors: p.authors, abstract: p.abstract, summary: p.summary, primary: p.primary, categories: p.categories, link: p.link, pdf: p.pdf, savedOn: todayISO() }; toast('Saved to library'); }
+  store.set('saved', saved);
+  return !!saved[p.id];
+}
+async function share(p) {
+  const data = { title: p.title, text: `${p.title}\n${p.link}`, url: p.link };
+  try { if (navigator.share) { await navigator.share(data); return; } } catch { return; }
+  try { await navigator.clipboard.writeText(data.text); toast('Link copied'); } catch { toast(p.link); }
+}
+
+// ------------------------------------------------------------ pieces
+function itemHTML(p) {
+  const cat = p.primary || (p.categories || [])[0];
+  const m = p.matched || {};
+  const hits = [...(m.keywords || []), ...(m.authors || [])];
+  return `<a class="item" href="#/paper/${encodeURIComponent(p.id)}">
+    <span class="badge" style="background:${tint(cat)}">${esc(code(cat))}</span>
+    <span style="min-width:0;flex:1">
+      <span class="t">${esc(p.title)}</span>
+      <span class="m" style="display:block">${esc(shortAuthors(p.authors))} · ${esc(p.id)}${p.announce_type === 'cross' ? ' · cross-list' : ''}</span>
+      ${hits.length ? `<span class="chips">${hits.slice(0, 3).map(h => `<span class="tag">${esc(h)}</span>`).join('')}</span>` : ''}
+    </span></a>`;
+}
+function setTabs(name) {
+  document.querySelectorAll('#tabs a').forEach(a => { const on = a.dataset.tab === name; a.classList.toggle('on', on); on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'); });
+  document.getElementById('tabs').style.display = name ? '' : 'none';
+  $app.classList.remove('dark');
+  window.scrollTo(0, 0);
+}
+
+// ------------------------------------------------------------ screens
+function viewToday() {
+  setTabs('today');
+  const t = state.today, pk = state.pick;
+  const h = new Date().getHours();
+  const greet = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+  const name = t && t.user_name ? `, ${esc(t.user_name)}` : '';
+  let html = `<div class="wrap">
+    <div class="row between" style="align-items:flex-start">
+      <div><h1>${greet}${name}</h1>
+      <p class="sub">${t ? `${esc(fmtDate(t.date))} · ${t.papers.length} new papers in your topics` : 'No papers yet'}</p></div>
+      <a class="iconbtn" href="#/search" aria-label="Search">${ICON.search}</a>
+    </div>`;
+  if (pk) {
+    html += `<a class="card-pick" href="#/pick">
+      <span class="txt"><span class="eyebrow">${pk.on_this_day ? 'On this day' : 'Pick of the day'}${pk.year ? ' · ' + esc(pk.year) : ''}</span>
+      <span class="t">${esc(pk.title)}</span><span class="sub" style="margin:0">${esc(shortAuthors(pk.authors))} · ${esc(pk.id)}</span></span>
+      <svg width="120" height="168" viewBox="0 0 120 168" fill="none" aria-hidden="true" style="flex-shrink:0"><path d="M6 110H44L58 46L68 96L78 104H114" stroke="#232B3A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M58 22l2.6 7 7 2.6-7 2.6-2.6 7-2.6-7-7-2.6 7-2.6z" fill="#8D6FD1"/><path d="M6 128H114" stroke="#232B3A" stroke-opacity=".25" stroke-width="2"/></svg>
+      <span class="go">${ICON.arrow}</span></a>`;
+  }
+  if (!t) {
+    html += `<h2>Your feed</h2><div class="empty">Nothing here yet. The daily job fills this in each morning after arXiv's release. If you have just set Flux up, run the job once from the <b>Actions</b> tab on GitHub.</div></div>`;
+    $app.innerHTML = html; return;
+  }
+  const tiles = t.categories.map(c => ({ id: c.id, name: c.name, n: c.count, bg: tint(c.id) }));
+  tiles.push({ id: 'match', name: 'Keyword hits', n: t.match_count, bg: 'var(--lav-soft)' });
+  html += `<h2>Your topics</h2><div class="tiles">${tiles.map(x => `<button class="tile${state.filter === x.id ? ' on' : ''}" style="background:${x.bg}" data-filter="${esc(x.id)}" aria-pressed="${state.filter === x.id}">${esc(x.name)}<span>${x.n} new</span></button>`).join('')}</div>`;
+  let papers = t.papers;
+  if (state.filter === 'match') papers = papers.filter(p => p.is_match);
+  else if (state.filter !== 'all') papers = papers.filter(p => (p.feeds || p.categories || []).includes(state.filter));
+  const label = state.filter === 'all' ? 'All new papers' : state.filter === 'match' ? 'Keyword hits' : (NAMES[state.filter] || state.filter);
+  html += `<div class="row between"><h2>${esc(label)}</h2>${state.filter !== 'all' ? '<button class="chip" data-filter="all">Show all</button>' : ''}</div>
+    <div class="list">${papers.length ? papers.map(itemHTML).join('') : '<div class="empty">No papers in this group today.</div>'}</div></div>`;
+  $app.innerHTML = html;
+  $app.querySelectorAll('[data-filter]').forEach(b => b.onclick = () => { state.filter = state.filter === b.dataset.filter ? 'all' : b.dataset.filter; viewToday(); });
+}
+
+function viewPaper(id) {
+  setTabs('');
+  const p = findPaper(id);
+  if (!p) { $app.innerHTML = `<div class="wrap"><a class="iconbtn ghost" href="#/" aria-label="Back">${ICON.back}</a><div class="empty" style="margin-top:12px">This paper is no longer in your recent feed. <a href="https://arxiv.org/abs/${esc(id)}">Open it on arXiv</a>.</div></div>`; return; }
+  markRead(p);
+  const lang = store.get('lang', 'en');
+  const hasSum = p.summary && (p.summary.en || p.summary.hi);
+  if (!hasSum) state.tab = 'abstract';
+  const cat = p.primary || (p.categories || [])[0];
+  const saved = !!store.get('saved', {})[p.id];
+  const m = p.matched || {};
+  const hits = [...(m.keywords || []), ...(m.authors || [])];
+  let body;
+  if (state.tab === 'summary' && hasSum) body = `<p class="body ${lang === 'hi' ? 'hi' : ''}">${esc(p.summary[lang] || p.summary.en)}</p><p class="note">Plain-language summary written by AI. Check it against the abstract.</p>`;
+  else body = `<p class="body">${esc(p.abstract)}</p><p class="note">Abstract as posted on arXiv.</p>`;
+  $app.innerHTML = `
+    <div class="hero"><a class="iconbtn" href="#/" data-back aria-label="Back">${ICON.back}</a>
+      <svg width="100%" height="170" viewBox="0 0 390 170" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#1E2430" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M40 100H120" stroke-dasharray="4 6"/><rect x="120" y="76" width="8" height="48" rx="2" fill="#fff"/><path d="M128 100H200"/>
+        <rect x="200" y="66" width="18" height="68" rx="3" fill="#D4C2F5" transform="rotate(12 209 100)"/>
+        <path d="M218 96L330 50" stroke="#8D6FD1"/><path d="M218 100L330 80" stroke="#5C8FB8"/><path d="M218 104L330 110" stroke="#5FA88A"/><path d="M218 108L330 140" stroke="#C9726B"/>
+        <rect x="330" y="40" width="26" height="110" rx="4" fill="#fff"/></svg></div>
+    <div class="wrap" style="padding-top:20px">
+      <span class="tag" style="background:${tint(cat)}">${esc(cat)}${NAMES[cat] ? ' · ' + esc(NAMES[cat]) : ''}</span>
+      <h1 class="serif" style="font-size:27px;line-height:1.18;margin-top:12px">${esc(p.title)}</h1>
+      <p class="sub" style="color:var(--muted-2);font-size:14px">${esc((p.authors || []).join(', '))}</p>
+      <p class="sub">arXiv:${esc(p.id)}${p._date ? ' · ' + esc(fmtDate(p._date)) : ''}</p>
+      ${hits.length ? `<div class="chips" style="margin-top:10px">${hits.map(h => `<span class="tag">${esc(h)}</span>`).join('')}</div>` : ''}
+      <div class="row between" style="margin-top:18px;flex-wrap:wrap;gap:8px">
+        ${hasSum ? `<div class="seg"><button data-tab="summary" class="${state.tab === 'summary' ? 'on' : ''}" aria-pressed="${state.tab === 'summary'}">Summary</button><button data-tab="abstract" class="${state.tab === 'abstract' ? 'on' : ''}" aria-pressed="${state.tab === 'abstract'}">Abstract</button></div>
+        <div class="seg"><button data-lang="en" class="${lang === 'en' ? 'on' : ''}" aria-pressed="${lang === 'en'}">EN</button><button data-lang="hi" class="hi ${lang === 'hi' ? 'on' : ''}" aria-pressed="${lang === 'hi'}">हिन्दी</button></div>` : '<span class="sub" style="margin:0">No AI summary for this paper.</span>'}
+      </div>
+      ${body}
+      <div class="actions">
+        <a class="pill" href="${esc(p.pdf || p.link)}" target="_blank" rel="noopener">Read PDF</a>
+        <button class="iconbtn outline" id="save" aria-label="${saved ? 'Remove from library' : 'Save to library'}" aria-pressed="${saved}">${ICON.save(saved)}</button>
+        <button class="iconbtn outline" id="share" aria-label="Share">${ICON.share}</button>
+      </div>
+      <p style="margin-top:14px;font-size:13px"><a href="${esc(p.link)}" target="_blank" rel="noopener">Open the arXiv page</a></p>
+    </div>`;
+  $app.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { state.tab = b.dataset.tab; viewPaper(id); });
+  $app.querySelectorAll('[data-lang]').forEach(b => b.onclick = () => { store.set('lang', b.dataset.lang); viewPaper(id); });
+  document.getElementById('save').onclick = () => { toggleSave(p); viewPaper(id); };
+  document.getElementById('share').onclick = () => share(p);
+}
+
+function viewPick() {
+  setTabs('');
+  $app.classList.add('dark');
+  const p = state.pick;
+  if (!p) { $app.innerHTML = `<div class="wrap"><a class="iconbtn ghost" href="#/" aria-label="Back" style="color:#fff">${ICON.back}</a><p style="color:var(--on-dark)">No pick yet. It appears after the first daily run.</p></div>`; return; }
+  const saved = !!store.get('saved', {})[p.id];
+  const label = p.on_this_day ? `On this day · ${fmtDate(p.date, { day: 'numeric', month: 'long' })}` : `Pick of the day · ${fmtDate(p.date, { day: 'numeric', month: 'long' })}`;
+  $app.innerHTML = `<div class="wrap">
+    <div class="row between"><a class="iconbtn ghost" href="#/" aria-label="Back" style="color:#fff">${ICON.back}</a><span class="eyebrow" style="color:var(--lav)">${esc(label)}</span></div>
+    <h1 class="serif" style="font-size:32px;line-height:1.12;margin-top:18px">${esc(p.title)}</h1>
+    <div style="margin-top:20px;height:150px;border-radius:24px;background:var(--navy-2);display:flex;align-items:center;justify-content:center">
+      <svg width="280" height="130" viewBox="0 0 280 130" fill="none" aria-hidden="true"><path d="M10 92H100L122 28L138 84L152 90H270" stroke="#D4C2F5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M122 6l2.6 7 7 2.6-7 2.6-2.6 7-2.6-7-7-2.6 7-2.6z" fill="#D5ECE4"/><path d="M10 112H270" stroke="#9FB0C7" stroke-opacity=".5" stroke-width="2"/><circle cx="40" cy="30" r="1.6" fill="#fff"/><circle cx="230" cy="24" r="1.6" fill="#fff"/><circle cx="200" cy="60" r="1.6" fill="#fff"/></svg>
+    </div>
+    ${p.note ? `<p style="margin:18px 0 0;font-size:16px;line-height:1.6;color:var(--on-dark)">${esc(p.note)}</p>` : ''}
+    <div class="facts">
+      <div class="fact"><b>${esc(p.year || '—')}</b>first posted</div>
+      <div class="fact"><b>${esc(shortAuthors(p.authors) || '—')}</b>${esc(p.primary || 'arXiv')}</div>
+    </div>
+    ${p.abstract ? `<details><summary>Read the abstract</summary><p class="body" style="color:var(--on-dark)">${esc(p.abstract)}</p></details>` : ''}
+    <a class="pill" style="margin-top:22px" href="${esc(p.link)}" target="_blank" rel="noopener">Read the paper · ${esc(p.id)}</a>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+      <button class="pill ghost" id="save" aria-pressed="${saved}">${saved ? 'Saved' : 'Save'}</button>
+      <button class="pill ghost" id="share">Share</button>
+    </div></div>`;
+  markRead(p);
+  document.getElementById('save').onclick = () => { toggleSave(p); viewPick(); };
+  document.getElementById('share').onclick = () => share(p);
+}
+
+async function viewSearch() {
+  setTabs('search');
+  const s = state.search;
+  const cats = state.today ? state.today.categories : [];
+  $app.innerHTML = `<div class="wrap">
+    <h1>Search</h1>
+    <label class="lbl" for="q">Title, author, keyword or arXiv ID</label>
+    <div class="search">${ICON.search}<input id="q" type="search" value="${esc(s.q)}" placeholder="e.g. echelle" autocomplete="off"></div>
+    <h2>Category</h2>
+    <div class="chips">${[{ id: 'all', name: 'All' }, ...cats].map(c => `<button class="chip${s.cat === c.id ? ' on' : ''}" data-cat="${esc(c.id)}" aria-pressed="${s.cat === c.id}">${esc(c.name)}</button>`).join('')}</div>
+    <h2>Posted within</h2>
+    <div class="seg" style="display:grid;grid-template-columns:repeat(3,1fr)">${[['1', 'Latest day'], ['7', '7 days'], ['30', '30 days']].map(([v, l]) => `<button data-range="${v}" class="${s.range === v ? 'on' : ''}" aria-pressed="${s.range === v}">${l}</button>`).join('')}</div>
+    <h2 id="rh">Results</h2><div class="list" id="res"><div class="empty">Searching…</div></div>
+    <p style="margin-top:18px;font-size:13px"><a id="all" target="_blank" rel="noopener" href="#">Search all of arXiv for this instead</a></p>
+  </div>`;
+  const q = document.getElementById('q');
+  const run = async () => {
+    s.q = q.value.trim();
+    document.getElementById('all').href = 'https://arxiv.org/search/?searchtype=all&query=' + encodeURIComponent(s.q || 'astro-ph');
+    const pool = await loadArchive(parseInt(s.range, 10));
+    const words = s.q.toLowerCase().split(/\s+/).filter(Boolean);
+    const seen = new Set();
+    const out = pool.filter(p => {
+      if (seen.has(p.id)) return false; seen.add(p.id);
+      if (s.cat !== 'all' && !(p.feeds || p.categories || []).includes(s.cat)) return false;
+      const hay = `${p.title} ${p.abstract} ${(p.authors || []).join(' ')} ${p.id}`.toLowerCase();
+      return words.every(w => hay.includes(w));
+    });
+    document.getElementById('rh').textContent = `${out.length} result${out.length === 1 ? '' : 's'}`;
+    document.getElementById('res').innerHTML = out.length ? out.slice(0, 100).map(itemHTML).join('') : '<div class="empty">Nothing found in your recent feed. Try a wider date range, or search all of arXiv below.</div>';
+  };
+  let tmr; q.oninput = () => { clearTimeout(tmr); tmr = setTimeout(run, 250); };
+  $app.querySelectorAll('[data-cat]').forEach(b => b.onclick = () => { s.cat = b.dataset.cat; viewSearch(); });
+  $app.querySelectorAll('[data-range]').forEach(b => b.onclick = () => { s.range = b.dataset.range; viewSearch(); });
+  run();
+}
+
+function viewAlerts() {
+  setTabs('alerts');
+  const t = state.today;
+  const list = (arr, empty) => arr && arr.length ? `<div class="chips">${arr.map(k => `<span class="tag" style="height:32px;padding:0 12px;font-size:13px">${esc(k)}</span>`).join('')}</div>` : `<p class="sub">${empty}</p>`;
+  $app.innerHTML = `<div class="wrap">
+    <h1>Alerts</h1>
+    <p class="sub">arXiv releases new papers once a day, Sunday to Thursday nights (US time). Flux checks every morning around 06:45 IST.</p>
+    <h2>How notifications reach you</h2>
+    <div class="empty">Notifications come through the free <b>ntfy</b> app. Install ntfy from the Play Store or App Store, tap <b>+</b>, and subscribe to your private topic name (the one you saved as <b>NTFY_TOPIC</b> on GitHub). Each morning you get one message: the number of new papers, your top keyword match, and the pick of the day. Tapping it opens Flux.</div>
+    <h2>Topics you follow</h2>${list(t && t.categories.map(c => `${c.name} (${c.id})`), 'Shown after the first daily run.')}
+    <h2>Watched keywords</h2>${list(t && t.keywords, 'None yet.')}
+    <h2>Followed authors</h2>${list(t && t.authors, 'None yet.')}
+    <p class="sub" style="margin-top:20px">To change these, edit <b>config.json</b> in your Flux repository on GitHub. The next morning's run uses the new settings.</p>
+  </div>`;
+}
+
+function viewLibrary() {
+  setTabs('library');
+  const saved = Object.values(store.get('saved', {})).reverse();
+  const read = store.get('read', {});
+  const reads = Object.values(read);
+  const days = new Set(reads.map(r => r.day));
+  let streak = 0; const d = new Date();
+  if (!days.has(todayISO())) d.setDate(d.getDate() - 1);
+  while (true) { const iso = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); if (!days.has(iso)) break; streak++; d.setDate(d.getDate() - 1); }
+  const since = new Date(); since.setDate(since.getDate() - 30);
+  const recent = reads.filter(r => new Date(r.day) >= since);
+  const mix = {}; recent.forEach(r => { mix[r.cat] = (mix[r.cat] || 0) + 1; });
+  const mixRows = Object.entries(mix).sort((a, b) => b[1] - a[1]).slice(0, 4);
+  $app.innerHTML = `<div class="wrap" style="padding-bottom:0">
+    <h1>Your library</h1>
+    <div class="tiles" style="margin-top:18px">
+      <div class="stat" style="background:var(--blue)"><b>${reads.length}</b><span>Papers opened</span></div>
+      <div class="stat" style="background:var(--lav-soft)"><b>${saved.length}</b><span>Saved</span></div>
+      <div class="stat" style="background:var(--mint)"><b>${streak} day${streak === 1 ? '' : 's'}</b><span>Reading streak</span></div>
+      <div class="stat" style="background:var(--rose)"><b>${recent.length}</b><span>Opened in 30 days</span></div>
+    </div></div>
+    <div class="panel">
+      <h2 style="margin-top:0">Your reading mix, last 30 days</h2>
+      ${mixRows.length ? `<div class="list">${mixRows.map(([c, n]) => { const pct = Math.round(100 * n / recent.length); return `<div class="bar"><i style="width:${Math.max(pct, 12)}%;background:${tint(c)}"></i><span>${esc(NAMES[c] || c || 'Other')} ${pct}%</span></div>`; }).join('')}</div>` : '<p style="color:var(--on-dark-2);font-size:14px">Open a few papers and your mix appears here.</p>'}
+      <h2>Saved papers</h2>
+      <div class="list">${saved.length ? saved.map(itemHTML).join('') : '<p style="color:var(--on-dark-2);font-size:14px">Tap the bookmark on any paper to keep it here. Saved papers stay on this phone.</p>'}</div>
+    </div>`;
+  $app.querySelector('.panel').classList.add('dark');
+}
+
+// ------------------------------------------------------------ router
+async function route() {
+  const h = location.hash.replace(/^#\/?/, '');
+  const [name, arg] = h.split('/');
+  if (name === 'paper' && arg) { const id = decodeURIComponent(arg); if (!findPaper(id)) await loadArchive(30); state.tab = 'summary'; return viewPaper(id); }
+  if (name === 'pick') return viewPick();
+  if (name === 'search') return viewSearch();
+  if (name === 'alerts') return viewAlerts();
+  if (name === 'library') return viewLibrary();
+  return viewToday();
+}
+window.addEventListener('hashchange', route);
+document.addEventListener('click', e => { const b = e.target.closest('[data-back]'); if (b && history.length > 1) { e.preventDefault(); history.back(); } });
+loadCore().then(route);
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+})();
+</script>
+</body>
+</html>
