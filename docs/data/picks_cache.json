@@ -1478,5 +1478,15 @@
   "abstract": "Twenty-six years ago a small committee report, building on earlier studies, expounded a compelling and poetic vision for the future of astronomy, calling for an infrared-optimized space telescope with an aperture of at least $4m$. With the support of their governments in the US, Europe, and Canada, 20,000 people realized that vision as the $6.5m$ James Webb Space Telescope. A generation of astronomers will celebrate their accomplishments for the life of the mission, potentially as long as 20 years, and beyond. This report and the scientific discoveries that follow are extended thank-you notes to the 20,000 team members. The telescope is working perfectly, with much better image quality than expected. In this and accompanying papers, we give a brief history, describe the observatory, outline its objectives and current observing program, and discuss the inventions and people who made it possible. We cite detailed reports on the design and the measured performance on orbit.",
   "published": "2023-04-10",
   "primary": "astro-ph.IM"
+ },
+ "1010.5270": {
+  "title": "Astronomical Spectroscopy",
+  "authors": [
+   "Philip Massey",
+   "Margaret M. Hanson"
+  ],
+  "abstract": "Spectroscopy is one of the most important tools that an astronomer has for studying the universe. This chapter begins by discussing the basics, including the different types of optical spectrographs, with extension to the ultraviolet and the near-infrared. Emphasis is given to the fundamentals of how spectrographs are used, and the trade-offs involved in designing an observational experiment. It then covers observing and reduction techniques, noting that some of the standard practices of flat-fielding often actually degrade the quality of the data rather than improve it. Although the focus is on point sources, spatially resolved spectroscopy of extended sources is also briefly discussed. Discussion of differential extinction, the impact of crowding, multi-object techniques, optimal extractions, flat-fielding considerations, and determining radial velocities and velocity dispersions provide the spectroscopist with the fundamentals needed to obtain the best data. Finally the chapter combines the previous material by providing some examples of real-life observing experiences with several typical instruments.",
+  "published": "2010-10-25",
+  "primary": "astro-ph.IM"
  }
 }
