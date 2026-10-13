@@ -1488,5 +1488,15 @@
   "abstract": "Spectroscopy is one of the most important tools that an astronomer has for studying the universe. This chapter begins by discussing the basics, including the different types of optical spectrographs, with extension to the ultraviolet and the near-infrared. Emphasis is given to the fundamentals of how spectrographs are used, and the trade-offs involved in designing an observational experiment. It then covers observing and reduction techniques, noting that some of the standard practices of flat-fielding often actually degrade the quality of the data rather than improve it. Although the focus is on point sources, spatially resolved spectroscopy of extended sources is also briefly discussed. Discussion of differential extinction, the impact of crowding, multi-object techniques, optimal extractions, flat-fielding considerations, and determining radial velocities and velocity dispersions provide the spectroscopist with the fundamentals needed to obtain the best data. Finally the chapter combines the previous material by providing some examples of real-life observing experiences with several typical instruments.",
   "published": "2010-10-25",
   "primary": "astro-ph.IM"
+ },
+ "1602.03837": {
+  "title": "Observation of Gravitational Waves from a Binary Black Hole Merger",
+  "authors": [
+   "The LIGO Scientific Collaboration",
+   "the Virgo Collaboration"
+  ],
+  "abstract": "On September 14, 2015 at 09:50:45 UTC the two detectors of the Laser Interferometer Gravitational-Wave Observatory simultaneously observed a transient gravitational-wave signal. The signal sweeps upwards in frequency from 35 to 250 Hz with a peak gravitational-wave strain of $1.0 \\times 10^{-21}$. It matches the waveform predicted by general relativity for the inspiral and merger of a pair of black holes and the ringdown of the resulting single black hole. The signal was observed with a matched-filter signal-to-noise ratio of 24 and a false alarm rate estimated to be less than 1 event per 203 000 years, equivalent to a significance greater than 5.1 σ. The source lies at a luminosity distance of $410^{+160}_{-180}$ Mpc corresponding to a redshift $z = 0.09^{+0.03}_{-0.04}$. In the source frame, the initial black hole masses are $36^{+5}_{-4} M_\\odot$ and $29^{+4}_{-4} M_\\odot$, and the final black hole mass is $62^{+4}_{-4} M_\\odot$, with $3.0^{+0.5}_{-0.5} M_\\odot c^2$ radiated in gravitational waves. All uncertainties define 90% credible intervals.These observations demonstrate the existence of binary stellar-mass black hole systems. This is the first direct detection of gravitational waves and the first observation of a binary black hole merger.",
+  "published": "2016-02-11",
+  "primary": "gr-qc"
  }
 }
