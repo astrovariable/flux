@@ -1591,5 +1591,33 @@
   "abstract": "On 2017 August 17 a binary neutron star coalescence candidate (later designated GW170817) with merger time 12:41:04 UTC was observed through gravitational waves by the Advanced LIGO and Advanced Virgo detectors. The Fermi Gamma-ray Burst Monitor independently detected a gamma-ray burst (GRB 170817A) with a time delay of $\\sim$1.7 s with respect to the merger time. From the gravitational-wave signal, the source was initially localized to a sky region of 31 deg$^2$ at a luminosity distance of $40^{+8}_{-8}$ Mpc and with component masses consistent with neutron stars. The component masses were later measured to be in the range 0.86 to 2.26 Msun. An extensive observing campaign was launched across the electromagnetic spectrum leading to the discovery of a bright optical transient (SSS17a, now with the IAU identification of AT 2017gfo) in NGC 4993 (at $\\sim$40 Mpc) less than 11 hours after the merger by the One-Meter, Two Hemisphere (1M2H) team using the 1 m Swope Telescope. The optical transient was independently detected by multiple teams within an hour. Subsequent observations targeted the object and its environment. Early ultraviolet observations revealed a blue transient that faded within 48 hours. Optical and infrared observations showed a redward evolution over $\\sim$10 days. Following early non-detections, X-ray and radio emission were discovered at the transient's position $\\sim$9 and $\\sim$16 days, respectively, after the merger. Both the X-ray and radio emission likely arise from a physical process that is distinct from the one that generates the UV/optical/near-infrared emission. No ultra-high-energy gamma-rays and no neutrino candidates consistent with the source were found in follow-up searches. (Abridged)",
   "published": "2017-10-16",
   "primary": "astro-ph.HE"
+ },
+ "astro-ph/9805201": {
+  "title": "Observational Evidence from Supernovae for an Accelerating Universe and a Cosmological Constant",
+  "authors": [
+   "Adam G. Riess",
+   "Alexei V. Filippenko",
+   "Peter Challis",
+   "Alejandro Clocchiattia",
+   "Alan Diercks",
+   "Peter M. Garnavich",
+   "Ron L. Gilliland",
+   "Craig J. Hogan",
+   "Saurabh Jha",
+   "Robert P. Kirshner",
+   "B. Leibundgut",
+   "M. M. Phillips",
+   "David Reiss",
+   "Brian P. Schmidt",
+   "Robert A. Schommer",
+   "R. Chris Smith",
+   "J. Spyromilio",
+   "Christopher Stubbs",
+   "Nicholas B. Suntzeff",
+   "John Tonry"
+  ],
+  "abstract": "We present observations of 10 type Ia supernovae (SNe Ia) between 0.16 < z < 0.62. With previous data from our High-Z Supernova Search Team, this expanded set of 16 high-redshift supernovae and 34 nearby supernovae are used to place constraints on the Hubble constant (H_0), the mass density (Omega_M), the cosmological constant (Omega_Lambda), the deceleration parameter (q_0), and the dynamical age of the Universe (t_0). The distances of the high-redshift SNe Ia are, on average, 10% to 15% farther than expected in a low mass density (Omega_M=0.2) Universe without a cosmological constant. Different light curve fitting methods, SN Ia subsamples, and prior constraints unanimously favor eternally expanding models with positive cosmological constant (i.e., Omega_Lambda > 0) and a current acceleration of the expansion (i.e., q_0 < 0). With no prior constraint on mass density other than Omega_M > 0, the spectroscopically confirmed SNe Ia are consistent with q_0 <0 at the 2.8 sigma and 3.9 sigma confidence levels, and with Omega_Lambda >0 at the 3.0 sigma and 4.0 sigma confidence levels, for two fitting methods respectively. Fixing a ``minimal'' mass density, Omega_M=0.2, results in the weakest detection, Omega_Lambda>0 at the 3.0 sigma confidence level. For a flat-Universe prior (Omega_M+Omega_Lambda=1), the spectroscopically confirmed SNe Ia require Omega_Lambda >0 at 7 sigma and 9 sigma level for the two fitting methods. A Universe closed by ordinary matter (i.e., Omega_M=1) is ruled out at the 7 sigma to 8 sigma level. We estimate the size of systematic errors, including evolution, extinction, sample selection bias, local flows, gravitational lensing, and sample contamination. Presently, none of these effects reconciles the data with Omega_Lambda=0 and q_0 > 0.",
+  "published": "1998-05-15",
+  "primary": "astro-ph"
  }
 }
